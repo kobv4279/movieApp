@@ -14,13 +14,6 @@ function LandingPage() {
     const [CurrentPage, setCurrentPage] = useState(0)
 
 
-    useEffect(() => {
-        const endpoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=1`;
-        fecthMovies(endpoint)
-
-
-    }, [])
-
 
     const fecthMovies = (endpoint) =>{
         fetch(endpoint)
@@ -29,10 +22,19 @@ function LandingPage() {
                 console.log(response)
                 setMovies([...Movies, ...response.results])
                 setMainMovieImage(response.results[0])
-                setCurrentPage(response.page)
+                setCurrentPage(response.page);
             }) 
  
     }
+
+
+    useEffect(() => {
+        const endpoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=1`;
+        fecthMovies(endpoint);
+
+
+    }, []);
+
 
     const loadMoreItems= ()=>{
       
@@ -68,7 +70,7 @@ function LandingPage() {
                     <React.Fragment key={index}>
                         <GridCards 
 
-                            LandingPage
+                            landingPage
                             image={movie.poster_path ?
                                 `${IMAGE_BASE_URL}w500${movie.poster_path}` :null}
                         
@@ -100,3 +102,13 @@ function LandingPage() {
 }
 
 export default LandingPage
+
+
+
+
+
+/////
+////Z:\nodejs\jhonAn_movieApp\boilerplate-mern-stack\server>npm run backend////
+
+
+////Z:\nodejs\jhonAn_movieApp\boilerplate-mern-stack\client>npm run start////
